@@ -71,15 +71,15 @@ Basic form:
     java [JVM options] -cp ".:cuttlefish_jars/*" BuildCUTTLEFISH \
         -f references.fasta.gz [builder options]
 
-Example from the source distribution:
+Example to build a large reference collection (e.g., 10,000 bacterial genomes) with loose false positive rate:
 
-    java -Xmx23G -Xss128m -cp ".:cuttlefish_jars/*" BuildCUTTLEFISH \
-        -f bacteria_who_2023.fasta.gz -t 23 -m 125
+    java -Xmx32G -Xss128m -cp ".:cuttlefish_jars/*" BuildCUTTLEFISH \
+        -f bacterial_genomes.fna.gz --e 0.01
 
-A larger reference collection can be built similarly:
+Example to build a small reference collection (e.g., 10,000 viral genomes) with strict false positive rate:
 
-    java -Xmx23G -Xss128m -cp ".:cuttlefish_jars/*" BuildCUTTLEFISH \
-        -f viruses_refseq_2023.fna.gz -t 23 -m 2222
+    java -Xmx16G -Xss128m -cp ".:cuttlefish_jars/*" BuildCUTTLEFISH \
+        -f viral_genomes.fna.gz -e 0.00001
 
 Builder arguments:
 
@@ -150,9 +150,9 @@ Basic form:
 Example using a 2 GB Java heap and retaining every positive match:
 
     java -Xmx2G -Xss128m -cp ".:cuttlefish_jars/*" CUTTLEFISH \
-        -d bacteria_who_2023_CUTTLEFISHdb \
-        -f bacterial_sampled.fastq.gz \
-        -p 0 -t 23
+        -d bacterial_genomes_CUTTLEFISHdb \
+        -f reads.fastq.gz \
+        -p 0
 
 Required classifier arguments:
 
